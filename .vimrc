@@ -6,3 +6,4 @@ set expandtab
 colorscheme molokai
 syntax on
 set pastetoggle=<C-E>
+set number
