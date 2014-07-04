@@ -140,4 +140,10 @@ function! s:ask_tabpage_number()
 endfunction
 nmap <C-w><C-t>  <C-w>t
 
+"au FileType c,cpp setlocal comments-=:// comments+=f://
+"au FileType c,cpp setlocal comments-=:// comments+=f://
+"au FileType conf,rb setlocal comments-=:# comments+=f:#
+"au FileType vimrc setlocal comments-=:" comments+=f:"
+autocmd FileType * setlocal formatoptions-=ro
+
 "EOF
