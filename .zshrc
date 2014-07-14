@@ -171,6 +171,7 @@ esac
 
 # vim:set ft=zsh:
 
+# default path
 PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH
 #eval "$(rbenv init -)"
@@ -178,9 +179,24 @@ export PATH
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 export COCOS_CONSOLE_ROOT=$HOME/Downloads/cocos2d-x-3.1.1/tools/cocos2d-console/bin
 export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+# node.js path
 export NODE_PATH=/usr/local/bin
+export PATH=$PATH:$HOME/node_modules/.bin
+
+# maven path
 export M3_HOME=/usr/local/apache-maven-3.2.2
 export M3=$M3_HOME/bin
 export PATH=$M3:$PATH
 
-export PATH=$PATH:$HOME/node_modules/.bin
+# android path
+export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:/opt/local/bin:/opt/local/sbin/:$PATH
+
+# java path
+export JAVA_HOME=`/usr/libexec/java_home`
+export JUNIT_HOME=/Library/JUNIT
+export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit4.10.jar:.
+
+function agvim() {
+  vim $(ag $@ | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
+}
