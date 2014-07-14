@@ -8,8 +8,7 @@ syntax on
 set pastetoggle=<C-E>
 set number
 
-"--------------
-"neobundle.vim
+"neobundle.vim {{{1
 "--------------
 " $ mkdir -p ~/.vim/bundle
 " $ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
@@ -22,8 +21,9 @@ if has('vim_starting')
 endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
-
 NeoBundleFetch 'Shougo/neobundle.vim'
+
+" bundles {{{2
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'tpope/vim-fugitive'
@@ -200,3 +200,29 @@ au FileType coffee,ruby,javascript,python IndentGuidesEnable
 nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
 "EOF
+
+" filetpe {{{1
+" default {{{2
+syntax enable
+filetype plugin indent on
+set autoindent
+set expandtab tabstop< softtabstop=2 shiftwidth=2
+
+
+" C {{{
+autocmd Filetype c setlocal
+  \ expandtab
+  \ tabstop<
+  \ softtabstop=2
+  \ shiftwidth=2
+
+" Java {{{
+autocmd Filetype java setlocal
+  \ expandtab
+  \ tabstop<
+  \ softtabstop=4
+  \ shiftwidth=4
+
+
+
+
