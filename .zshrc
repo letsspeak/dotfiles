@@ -132,7 +132,28 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias mkdir='mkdir -p'
+
+# vim
+alias v='vim'
+alias vi='vim'
+
+# git
 alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gb='git branch'
+alias gck='git checkout'
+alias gckb='git checkout -b'
+alias gcm='git commit'
+alias gcmm='git commit -m'
+alias gcma='git commit --amend -m'
+alias gp='git push'
+alias gpo='git push origin'
+alias gpom='git push origin master'
+alias gcl='git clone'
+alias gm='git merge'
+alias gf='git fetch'
+alias gpl='git pull'
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
