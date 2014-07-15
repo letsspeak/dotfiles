@@ -1,11 +1,11 @@
-# 少し凝った zshrc
-# License : MIT
-# http://mollifier.mit-license.org/
-
-########################################
-# 環境変数
-export LANG=ja_JP.UTF-8
-
+case $OSTYPE in
+  darwin*)
+    if [ -f $HOME/.zshrc.darwin ]; then . $HOME/.zshrc.darwin; fi
+    ;;
+  linux*)
+    if [ -f $HOME/.zshrc.linux ]; then . $HOME/.zshrc.linux; fi
+    ;;
+esac
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -175,48 +175,7 @@ elif which putclip >/dev/null 2>&1 ; then
     alias -g C='| putclip'
 fi
 
-
-
-########################################
-# OS 別の設定
-case ${OSTYPE} in
-    darwin*)
-        #Mac用の設定
-        export CLICOLOR=1
-        alias ls='ls -G -F'
-        ;;
-    linux*)
-        #Linux用の設定
-        ;;
-esac
-
 # vim:set ft=zsh:
-
-# default path
-PATH=/usr/local/bin:$HOME/bin:$PATH
-export PATH
-#eval "$(rbenv init -)"
-
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=$HOME/Downloads/cocos2d-x-3.1.1/tools/cocos2d-console/bin
-export PATH=$COCOS_CONSOLE_ROOT:$PATH
-
-# node.js path
-export NODE_PATH=/usr/local/bin
-export PATH=$PATH:$HOME/node_modules/.bin
-
-# maven path
-export M3_HOME=/usr/local/apache-maven-3.2.2
-export M3=$M3_HOME/bin
-export PATH=$M3:$PATH
-
-# android path
-export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:/opt/local/bin:/opt/local/sbin/:$PATH
-
-# java path
-export JAVA_HOME=`/usr/libexec/java_home`
-export JUNIT_HOME=/Library/JUNIT
-export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit4.10.jar:.
 
 function agvim() {
   vim $(ag $@ | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
