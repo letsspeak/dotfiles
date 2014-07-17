@@ -151,7 +151,7 @@ alias gp='git push'
 alias gpo='git push origin'
 alias gpom='git push origin master'
 alias gcl='git clone'
-alias gm='git merge'
+alias gm='git merge --no-ff'
 alias gf='git fetch'
 alias gpl='git pull'
 
