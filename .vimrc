@@ -200,7 +200,7 @@ hi IndentGuidesEven ctermbg=237
 au FileType coffee,ruby,javascript,python IndentGuidesEnable
 nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
-"EOF
+au BufNewFile,BufRead *.ejs set filetype=html
 
 " filetpe {{{1
 " default {{{2
@@ -226,6 +226,9 @@ autocmd Filetype java setlocal
 
 
 "accelerate.vim
+
+let g:accelerate_timeout = 90
+
 call accelerate#map('nv', 'e', '<C-u>', 'repeat("\<C-u>", v:count1)')
 call accelerate#map('nv', 'e', '<C-d>', 'repeat("\<C-d>", v:count1)')
  
