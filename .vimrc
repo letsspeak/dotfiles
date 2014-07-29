@@ -150,8 +150,9 @@ nmap <C-w><C-t>  <C-w>t
 "au FileType vimrc setlocal comments-=:" comments+=f:"
 autocmd FileType * setlocal formatoptions-=ro
 
-" vimにcoffeeファイルタイプを認識させる
-au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
+au BufRead,BufNewFile *.scala set filetype=scala
+	
 " インデントを設定
 autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 " taglistの設定 coffeeを追加
