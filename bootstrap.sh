@@ -2,6 +2,6 @@
 
 PREFIX=${PREFIX-$PWD}
 
-git clone https://github.com/etheriqa/dotfiles.git $PREFIX/dotfiles && \
+git clone https://github.com/letsspeak/dotfiles.git $PREFIX/dotfiles && \
 cd $PREFIX/dotfiles && \
 make install PREFIX=$HOME
