@@ -7,6 +7,7 @@ colorscheme molokai
 syntax on
 set pastetoggle=<C-E>
 set number
+set ruler
 
 "neobundle.vim {{{1
 "--------------
@@ -41,6 +42,8 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'claco/jasmine.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'emonkak/vim-accelerate'
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'clausreinke/typescript-tools'
 
 filetype plugin on
 filetype indent on
