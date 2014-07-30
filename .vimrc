@@ -241,3 +241,8 @@ call accelerate#map('nv', '', 'k', 'gk')
 call accelerate#map('nv', '', 'h', 'h')
 call accelerate#map('nv', 'e', 'l', 'foldclosed(line(".")) != -1 ? "zo" : "l"')
 
+"ctrlp
+
+noremap <C-p> :<C-u>CtrlP .<CR>
+noremap <C-@> :<C-u>CtrlP ~/<CR>
+let g:ctrlp_show_hidden = 1
