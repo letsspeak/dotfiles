@@ -240,13 +240,6 @@ call accelerate#map('nv', 'e', 'l', 'foldclosed(line(".")) != -1 ? "zo" : "l"')
 
 "ctrlp
 
-"noremap <C-@> :<C-u>CtrlP .<CR>
-noremap <C-p>
-\ :call Open_ctrlp('.')<CR>
-noremap <C-@>
-\ :call Open_ctrlp('~/')<CR>
-function! Open_ctrlp(path)
-  let open_ctrlp_cmd = ':CtrlP '.a:path
-  exec open_ctrlp_cmd
-endfunction
-
+noremap <C-p> :<C-u>CtrlP .<CR>
+noremap <C-@> :<C-u>CtrlP ~/<CR>
+let g:ctrlp_show_hidden = 1
