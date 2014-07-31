@@ -246,3 +246,6 @@ call accelerate#map('nv', 'e', 'l', 'foldclosed(line(".")) != -1 ? "zo" : "l"')
 noremap <C-p> :<C-u>CtrlP .<CR>
 noremap <C-@> :<C-u>CtrlP ~/<CR>
 let g:ctrlp_show_hidden = 1
+
+set list
+set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
