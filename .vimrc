@@ -8,6 +8,7 @@ syntax on
 set pastetoggle=<C-E>
 set number
 set ruler
+set laststatus=2
 
 "neobundle.vim {{{1
 "--------------
@@ -249,3 +250,5 @@ let g:ctrlp_show_hidden = 1
 
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
+
+noremap <F5> :source ~/.vimrc<CR>
