@@ -9,6 +9,9 @@ esac
 
 export LANG=ja_JP.UTF-8
 
+# play2 framework
+export PATH=$PATH:/usr/local/play/play-2.2.3
+
 # default path
 PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH
@@ -19,3 +22,4 @@ if [ -d $HOME/.rbenv ] ; then
 #  $ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 #  $ rbenv install
 fi
+
