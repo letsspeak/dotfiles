@@ -15,11 +15,18 @@ export PATH=$PATH:/usr/local/play/play-2.2.3
 # default path
 PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH
+
+# rbenv
 if [ -d $HOME/.rbenv ] ; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 # first time 
 #  $ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 #  $ rbenv install
+fi
+
+# cabal
+if [ -d $HOME/.cabal ] ; then
+  export PATH="$HOME/.cabal/bin:$PATH"
 fi
 
