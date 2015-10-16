@@ -24,7 +24,6 @@ endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 
 " bundles {{{2
 NeoBundle 'Shougo/unite.vim'
@@ -51,6 +50,8 @@ filetype plugin on
 filetype indent on
 
 NeoBundleCheck
+
+call neobundle#end()
 
 " Tab pages  "{{{2
 " Fallback  "{{{3
