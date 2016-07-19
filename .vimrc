@@ -42,7 +42,6 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'claco/jasmine.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'emonkak/vim-accelerate'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'clausreinke/typescript-tools'
 
@@ -234,15 +233,15 @@ autocmd Filetype java setlocal
 
 "accelerate.vim
 
-let g:accelerate_timeout = 90
-
-call accelerate#map('nv', 'e', '<C-u>', 'repeat("\<C-u>", v:count1)')
-call accelerate#map('nv', 'e', '<C-d>', 'repeat("\<C-d>", v:count1)')
- 
-call accelerate#map('nv', '', 'j', 'gj')
-call accelerate#map('nv', '', 'k', 'gk')
-call accelerate#map('nv', '', 'h', 'h')
-call accelerate#map('nv', 'e', 'l', 'foldclosed(line(".")) != -1 ? "zo" : "l"')
+"let g:accelerate_timeout = 90
+"
+"call accelerate#map('nv', 'e', '<C-u>', 'repeat("\<C-u>", v:count1)')
+"call accelerate#map('nv', 'e', '<C-d>', 'repeat("\<C-d>", v:count1)')
+" 
+"call accelerate#map('nv', '', 'j', 'gj')
+"call accelerate#map('nv', '', 'k', 'gk')
+"call accelerate#map('nv', '', 'h', 'h')
+"call accelerate#map('nv', 'e', 'l', 'foldclosed(line(".")) != -1 ? "zo" : "l"')
 
 "ctrlp
 
