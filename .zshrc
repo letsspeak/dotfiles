@@ -7,6 +7,8 @@ case $OSTYPE in
     ;;
 esac
 
+if [ -f $HOME/.zshrc.local ]; then . $HOME/.zshrc.local; fi
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
