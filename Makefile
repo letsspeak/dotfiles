@@ -1,6 +1,7 @@
 SHELL:=/bin/bash
 PREFIX:=$(HOME)
 OSRELEASE = $(shell cat /proc/sys/kernel/osrelease 2>/dev/null)
+UNAME_S = $(shell uname -s)
 
 DOTFILES:=\
     .inputrc\
@@ -103,6 +104,15 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 			exit 1; \
 		fi \
 	)
+else
+	@# for OSX
+ifeq ($(UNAME_S),Darwin)
+	@echo "this is darwin";
+endif
+	@# for Linux
+ifeq ($(UNAME_S),Linux)
+	@echo "this is linux";
+endif
 endif
 
 export-vscode:
