@@ -1,6 +1,7 @@
 SHELL:=/bin/bash
 PREFIX:=$(HOME)
-OSRELEASE = $(shell cat /proc/sys/kernel/osrelease 2>/dev/null)
+OSRELEASE=$(shell cat /proc/sys/kernel/osrelease 2>/dev/null)
+UNAME_S=$(shell uname -s)
 
 DOTFILES:=\
     .inputrc\
@@ -18,6 +19,18 @@ VIMDIRS:=\
     plugin\
     syntax\
     colors\
+
+# VSCode import/export settings
+ifeq ($(UNAME_S),Darwin)
+  VSCODE_SETTINGS_DIR=$(HOME)/Library/Application\ Support/Code/User
+  VSCODE_LOCALE_IDENTIFIER="darwin"
+endif
+ifeq ($(UNAME_S),Linux)
+  VSCODE_SETTINGS_DIR="$(HOME)/.config/Code/User"
+  VSCODE_LOCALE_IDENTIFIER="linux"
+endif
+
+VSCODE_DOTFILES_DIR:="$(PWD)/vscode"
 
 VSCODE_SETTING_FILES:=\
     locale.json
@@ -73,21 +86,23 @@ uninstall:
 	rm -fr $(PREFIX)/.vim
 
 import-vscode:
-	@# for Bash on Ubuntu on Windows
+ifndef VSCODE_DOTFILES_DIR
+	$(error VSCODE_DOTFILES_DIR is not set)
+endif
 ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 	@while [ -z "$$USERNAME" ]; do \
 		read -r -p "Input Windows Username: " USERNAME;\
 	done && \
 	( \
 		FROM_DIR="/mnt/c/Users/$$USERNAME/AppData/Roaming/Code/User"; \
-		TO_DIR="./vscode"; \
+		TO_DIR=$(VSCODE_DOTFILES_DIR); \
 		if [ -e "$$FROM_DIR" ]; then \
 			for filename in $(VSCODE_SETTING_FILES); do \
 				FROM_PATH="$$FROM_DIR/$$filename"; \
 				TO_PATH="$$TO_DIR/$$filename"; \
 				if [ -e "$$FROM_PATH" ]; then \
 					echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
-					cp $$FROM_PATH $$TO_PATH; \
+					cp "$$FROM_PATH" "$$TO_PATH"; \
 				fi \
 			done; \
 			for json in $(VSCODE_LOCALED_JSONS); do \
@@ -95,7 +110,7 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 				TO_PATH="$$TO_DIR/$$json.win.json"; \
 				if [ -e "$$FROM_PATH" ]; then \
 					echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
-					cp $$FROM_PATH $$TO_PATH; \
+					cp "$$FROM_PATH" "$$TO_PATH"; \
 				fi \
 			done \
 		else \
@@ -103,6 +118,36 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 			exit 1; \
 		fi \
 	)
+else
+ifndef VSCODE_SETTINGS_DIR
+	$(error VSCODE_SETTINGS_DIR is not set)
+endif
+ifndef VSCODE_LOCALE_IDENTIFIER
+	$(error VSCODE_LOCALE_IDENTIFIER is not set)
+endif
+	@FROM_DIR=$(VSCODE_SETTINGS_DIR); \
+	TO_DIR=$(VSCODE_DOTFILES_DIR); \
+	if [ -e "$$FROM_DIR" ]; then \
+		for filename in $(VSCODE_SETTING_FILES); do \
+			FROM_PATH="$$FROM_DIR/$$filename"; \
+			TO_PATH="$$TO_DIR/$$filename"; \
+			if [ -e "$$FROM_PATH" ]; then \
+				echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+				cp "$$FROM_PATH" "$$TO_PATH"; \
+			fi \
+		done; \
+		for json in $(VSCODE_LOCALED_JSONS); do \
+			FROM_PATH="$$FROM_DIR/$$json.json"; \
+			TO_PATH="$$TO_DIR/$$json.$(VSCODE_LOCALE_IDENTIFIER).json"; \
+			if [ -e "$$FROM_PATH" ]; then \
+				echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+				cp "$$FROM_PATH" "$$TO_PATH"; \
+			fi \
+		done \
+	else \
+		echo -e "\033[1;31m[FATAL]\033[0m Target directory $$FROM_DIR not found."; \
+		exit 1; \
+	fi
 endif
 
 export-vscode:
@@ -112,7 +157,7 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 		read -r -p "Input Windows Username: " USERNAME;\
 	done && \
 	( \
-		FROM_DIR="./vscode"; \
+		FROM_DIR=$(VSCODE_DOTFILES_DIR); \
 		TO_DIR="/mnt/c/Users/$$USERNAME/AppData/Roaming/Code/User"; \
 		if [ -e "$$TO_DIR" ]; then \
 			for filename in $(VSCODE_SETTING_FILES); do \
@@ -125,7 +170,7 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 							case $$is_overwrite in \
 								'' | [Yy]* ) \
 									echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
-									cp $$FROM_PATH $$TO_PATH; \
+									cp "$$FROM_PATH" "$$TO_PATH"; \
 									break; \
 									;; \
 								[Nn]* ) \
@@ -137,7 +182,7 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 						done \
 					else \
 						echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
-						cp $$FROM_PATH $$TO_PATH; \
+						cp "$$FROM_PATH" "$$TO_PATH"; \
 					fi \
 				fi \
 			done; \
@@ -151,7 +196,7 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 							case $$is_overwrite in \
 								'' | [Yy]* ) \
 									echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
-									cp $$FROM_PATH $$TO_PATH; \
+									cp "$$FROM_PATH" "$$TO_PATH"; \
 									break; \
 									;; \
 								[Nn]* ) \
@@ -163,7 +208,7 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 						done \
 					else \
 						echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
-						cp $$FROM_PATH $$TO_PATH; \
+						cp "$$FROM_PATH" "$$TO_PATH"; \
 					fi \
 				fi \
 			done \
@@ -172,4 +217,70 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 			exit 1; \
 		fi \
 	)
+else
+ifndef VSCODE_SETTINGS_DIR
+	$(error VSCODE_SETTINGS_DIR is not set)
+endif
+ifndef VSCODE_LOCALE_IDENTIFIER
+	$(error VSCODE_LOCALE_IDENTIFIER is not set)
+endif
+	@FROM_DIR=$(VSCODE_DOTFILES_DIR); \
+	TO_DIR=$(VSCODE_SETTINGS_DIR); \
+	if [ -e "$$TO_DIR" ]; then \
+		for filename in $(VSCODE_SETTING_FILES); do \
+			FROM_PATH="$$FROM_DIR/$$filename"; \
+			TO_PATH="$$TO_DIR/$$filename"; \
+			if [ -e "$$FROM_PATH" ]; then \
+				if [ -e "$$TO_PATH" ]; then \
+					while true; do \
+						read -p "Are you overwrite $$TO_PATH ? (Default Yes) [Y/n]" is_overwrite; \
+						case $$is_overwrite in \
+							'' | [Yy]* ) \
+								echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+								cp "$$FROM_PATH" "$$TO_PATH"; \
+								break; \
+								;; \
+							[Nn]* ) \
+								break; \
+								;; \
+							* ) \
+								echo "Please answer YES or NO."; \
+						esac \
+					done \
+				else \
+					echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+					cp "$$FROM_PATH" "$$TO_PATH"; \
+				fi \
+			fi \
+		done; \
+		for json in $(VSCODE_LOCALED_JSONS); do \
+			FROM_PATH="$$FROM_DIR/$$json.$(VSCODE_LOCALE_IDENTIFIER).json"; \
+			TO_PATH="$$TO_DIR/$$json.json"; \
+			if [ -e "$$FROM_PATH" ]; then \
+				if [ -e "$$TO_PATH" ]; then \
+					while true; do \
+						read -p "Are you overwrite $$TO_PATH ? (Default Yes) [Y/n]" is_overwrite; \
+						case $$is_overwrite in \
+							'' | [Yy]* ) \
+								echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+								cp "$$FROM_PATH" "$$TO_PATH"; \
+								break; \
+								;; \
+							[Nn]* ) \
+								break; \
+								;; \
+							* ) \
+								echo "Please answer YES or NO."; \
+						esac \
+					done \
+				else \
+					echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+					cp "$$FROM_PATH" "$$TO_PATH"; \
+				fi \
+			fi \
+		done \
+	else \
+		echo -e "\033[1;31m[FATAL]\033[0m Target directory $$TO_DIR not found."; \
+		exit 1; \
+	fi
 endif
