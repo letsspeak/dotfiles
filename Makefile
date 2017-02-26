@@ -1,7 +1,7 @@
 SHELL:=/bin/bash
 PREFIX:=$(HOME)
-OSRELEASE = $(shell cat /proc/sys/kernel/osrelease 2>/dev/null)
-UNAME_S = $(shell uname -s)
+OSRELEASE=$(shell cat /proc/sys/kernel/osrelease 2>/dev/null)
+UNAME_S=$(shell uname -s)
 
 DOTFILES:=\
     .inputrc\
@@ -19,6 +19,16 @@ VIMDIRS:=\
     plugin\
     syntax\
     colors\
+
+# VSCode import/export settings
+ifeq ($(UNAME_S),Darwin)
+  VSCODE_SETTINGS_DIR="$(HOME)/Library/Application Support/Code/User"
+endif
+ifeq ($(UNAME_S),Linux)
+  VSCODE_SETTINGS_DIR="$(HOME)/.config/Code/User"
+endif
+
+VSCODE_DOTFILES_DIR:="$(PWD)/vscode"
 
 VSCODE_SETTING_FILES:=\
     locale.json
@@ -81,7 +91,7 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 	done && \
 	( \
 		FROM_DIR="/mnt/c/Users/$$USERNAME/AppData/Roaming/Code/User"; \
-		TO_DIR="./vscode"; \
+		TO_DIR=$(VSCODE_DOTFILES_DIR); \
 		if [ -e "$$FROM_DIR" ]; then \
 			for filename in $(VSCODE_SETTING_FILES); do \
 				FROM_PATH="$$FROM_DIR/$$filename"; \
@@ -105,14 +115,10 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 		fi \
 	)
 else
-	@# for OSX
-ifeq ($(UNAME_S),Darwin)
-	@echo "this is darwin";
-endif
-	@# for Linux
-ifeq ($(UNAME_S),Linux)
-	@echo "this is linux";
-endif
+	@FROM_DIR=$(VSCODE_SETTINGS_DIR); \
+	TO_DIR=$(VSCODE_DOTFILES_DIR); \
+	echo $$FROM_DIR; \
+	echo $$TO_DIR;
 endif
 
 export-vscode:
@@ -122,7 +128,7 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 		read -r -p "Input Windows Username: " USERNAME;\
 	done && \
 	( \
-		FROM_DIR="./vscode"; \
+		FROM_DIR=$(VSCODE_DOTFILES_DIR); \
 		TO_DIR="/mnt/c/Users/$$USERNAME/AppData/Roaming/Code/User"; \
 		if [ -e "$$TO_DIR" ]; then \
 			for filename in $(VSCODE_SETTING_FILES); do \
