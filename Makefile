@@ -127,8 +127,6 @@ ifndef VSCODE_LOCALE_IDENTIFIER
 endif
 	@FROM_DIR=$(VSCODE_SETTINGS_DIR); \
 	TO_DIR=$(VSCODE_DOTFILES_DIR); \
-	echo $$FROM_DIR; \
-	echo $$TO_DIR; \
 	if [ -e "$$FROM_DIR" ]; then \
 		for filename in $(VSCODE_SETTING_FILES); do \
 			FROM_PATH="$$FROM_DIR/$$filename"; \
