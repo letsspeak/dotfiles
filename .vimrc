@@ -9,6 +9,8 @@ set pastetoggle=<C-E>
 set number
 set ruler
 set laststatus=2
+set visualbell t_vb=
+set noerrorbells
 
 "neobundle.vim {{{1
 "--------------
