@@ -1,6 +1,6 @@
 SHELL:=/bin/bash
 PREFIX:=$(HOME)
-OSRELEASE = $(shell cat /proc/sys/kernel/osrelease)
+OSRELEASE = $(shell cat /proc/sys/kernel/osrelease 2>/dev/null)
 
 DOTFILES:=\
     .inputrc\
