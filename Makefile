@@ -20,9 +20,11 @@ VIMDIRS:=\
     colors\
 
 VSCODE_SETTING_FILES:=\
-    locale.json\
-    settings.json\
-    keybindings.json
+    locale.json
+
+VSCODE_LOCALED_JSONS:=\
+    settings\
+    keybindings
 
 all: help
 
@@ -83,8 +85,18 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 			for filename in $(VSCODE_SETTING_FILES); do \
 				FROM_PATH="$$FROM_DIR/$$filename"; \
 				TO_PATH="$$TO_DIR/$$filename"; \
-				echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
-				cp $$FROM_PATH $$TO_PATH; \
+				if [ -e "$$FROM_PATH" ]; then \
+					echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+					cp $$FROM_PATH $$TO_PATH; \
+				fi \
+			done; \
+			for json in $(VSCODE_LOCALED_JSONS); do \
+				FROM_PATH="$$FROM_DIR/$$json.json"; \
+				TO_PATH="$$TO_DIR/$$json.win.json"; \
+				if [ -e "$$FROM_PATH" ]; then \
+					echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+					cp $$FROM_PATH $$TO_PATH; \
+				fi \
 			done \
 		else \
 			echo -e "\033[1;31m[FATAL]\033[0m Target directory $$FROM_DIR not found."; \
@@ -109,7 +121,33 @@ ifneq (, $(findstring Microsoft,$(OSRELEASE)))
 				if [ -e "$$FROM_PATH" ]; then \
 					if [ -e "$$TO_PATH" ]; then \
 						while true; do \
-							read -p "$$filename already exists. Overwrite? (Default Yes) [Y/n]" is_overwrite; \
+							read -p "Are you overwrite $$TO_PATH ? (Default Yes) [Y/n]" is_overwrite; \
+							case $$is_overwrite in \
+								'' | [Yy]* ) \
+									echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+									cp $$FROM_PATH $$TO_PATH; \
+									break; \
+									;; \
+								[Nn]* ) \
+									break; \
+									;; \
+								* ) \
+									echo "Please answer YES or NO."; \
+							esac \
+						done \
+					else \
+						echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
+						cp $$FROM_PATH $$TO_PATH; \
+					fi \
+				fi \
+			done; \
+			for json in $(VSCODE_LOCALED_JSONS); do \
+				FROM_PATH="$$FROM_DIR/$$json.win.json"; \
+				TO_PATH="$$TO_DIR/$$json.json"; \
+				if [ -e "$$FROM_PATH" ]; then \
+					if [ -e "$$TO_PATH" ]; then \
+						while true; do \
+							read -p "Are you overwrite $$TO_PATH ? (Default Yes) [Y/n]" is_overwrite; \
 							case $$is_overwrite in \
 								'' | [Yy]* ) \
 									echo "Copying... $$FROM_PATH >> $$TO_PATH"; \
