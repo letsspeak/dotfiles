@@ -12,16 +12,28 @@ cd dotfiles
 make install
 ```
 
-## UPDATE
+## Update
 
 ```sh
 make update
 ```
 
-## UNINSTALL
+## Uninstall
 
 ```sh
 make uninstall
+```
+
+## Import VSCode setting files
+
+```sh
+make import-vscode
+```
+
+## Export VSCode setting files
+
+```sh
+make export-vscode
 ```
 
 ## Requirements
@@ -30,10 +42,6 @@ make uninstall
 * gcc
 * git
 * make
-
-## Paku...Inspired from
-
-https://github.com/etheriqa/dotfiles
 
 ## Switch to zsh shell
 
