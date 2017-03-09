@@ -85,6 +85,11 @@ uninstall:
 	rm -f $(foreach dotfile,$(DOTFILES),$(PREFIX)/$(dotfile))
 	rm -fr $(PREFIX)/.vim
 
+
+#
+# VSCode import/export settings
+#
+
 import-vscode:
 ifndef VSCODE_DOTFILES_DIR
 	$(error VSCODE_DOTFILES_DIR is not set)
@@ -149,6 +154,7 @@ endif
 		exit 1; \
 	fi
 endif
+
 
 export-vscode:
 	@# for Bash on Ubuntu on Windows

@@ -1,3 +1,12 @@
+# Requirements
+
+* coreutils
+* gcc
+* git
+* make
+
+# Usage
+
 ## Install
 
 ```sh
@@ -24,26 +33,19 @@ make update
 make uninstall
 ```
 
-## Import VSCode setting files
+## Visual Studio Code setting files
 
 ```sh
+# Import Visual Studio Code setting files to dotfiles
 make import-vscode
-```
 
-## Export VSCode setting files
-
-```sh
+# Export Visual Studio Code setting files from dotfiles
 make export-vscode
 ```
 
-## Requirements
+# Other
 
-* coreutils
-* gcc
-* git
-* make
-
-## Switch to zsh shell
+## Switch to zsh
 
 ```sh
 $ cat /etc/shells
