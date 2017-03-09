@@ -1,4 +1,6 @@
 // 既定の設定を上書きするには、このファイル内に設定を挿入します
 {
-    "editor.cursorStyle": "block"
+    "editor.cursorStyle": "block",
+    "editor.fontSize": 16,
+    "terminal.integrated.fontSize": 16
 }

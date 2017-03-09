@@ -1,3 +1,8 @@
 // Place your key bindings in this file to overwrite the defaults
 [
+    { "key": "cmd+shift+`", "command": "workbench.action.terminal.toggleTerminal" },
+    { "key": "ctrl+;", "command": "workbench.action.terminal.focus", 
+                          "when": "editorTextFocus"},
+    { "key": "ctrl+;", "command": "workbench.action.focusFirstEditorGroup",
+                           "when": "terminalFocus"}
 ]
