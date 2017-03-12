@@ -657,6 +657,9 @@
 { "key": "ctrl+t l",              "command": "workbench.action.nextEditor" },
 { "key": "ctrl+t k",              "command": "workbench.action.nextEditor" },
 { "key": "ctrl+t h",        "command": "workbench.action.previousEditor" },
-{ "key": "ctrl+t j",              "command": "workbench.action.previousEditor" }
+{ "key": "ctrl+t j",              "command": "workbench.action.previousEditor" },
+
+// Preferences
+{"key": "alt+,", "command": "workbench.action.openGlobalSettings" }
 
 ]
