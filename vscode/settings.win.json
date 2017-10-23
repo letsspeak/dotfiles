@@ -1,5 +1,7 @@
 // Place your settings in this file to overwrite the default settings
 {
 //    "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe"
-    "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\bash.exe"
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\bash.exe",
+    "terminal.integrated.fontSize": 16,
+    "workbench.colorTheme": "Visual Studio Dark"
 }
