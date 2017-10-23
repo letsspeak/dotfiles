@@ -15,12 +15,3 @@ export LANG=ja_JP.UTF-8
 PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH
 
-# rbenv
-if [ -d $HOME/.rbenv ] ; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-# first time 
-#  $ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-#  $ rbenv install
-fi
-

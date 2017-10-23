@@ -183,3 +183,15 @@ function agvim() {
   vim $(ag $@ | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
 }
 
+# rbenv
+if [ -d $HOME/.rbenv ] ; then
+
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+
+# first time 
+#  $ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+#  $ rbenv install
+
+fi
+
