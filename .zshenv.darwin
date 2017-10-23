@@ -12,7 +12,7 @@ export M3=$M3_HOME/bin
 export PATH=$M3:$PATH
 
 # android path
-export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:/opt/local/bin:/opt/local/sbin/:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:/opt/local/bin:/opt/local/sbin:$PATH
 
 # java path
 export JAVA_HOME="`/usr/libexec/java_home -v '1.8*'`"
