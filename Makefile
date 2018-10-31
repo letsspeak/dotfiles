@@ -12,6 +12,7 @@ DOTFILES:=\
     .zshrc\
     .zshrc.darwin\
     .zshrc.linux\
+    .tmux.conf\
 
 VIMDIRS:=\
     ftdetect\
