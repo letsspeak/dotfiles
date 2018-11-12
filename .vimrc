@@ -46,6 +46,7 @@ NeoBundle 'claco/jasmine.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'clausreinke/typescript-tools'
+NeoBundle 'avakhov/vim-yaml'
 
 filetype plugin on
 filetype indent on
@@ -255,3 +256,5 @@ set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
 noremap <F5> :source ~/.vimrc<CR>
+
+source ~/.vimrc.local
