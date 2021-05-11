@@ -12,48 +12,44 @@ set laststatus=2
 set visualbell t_vb=
 set noerrorbells
 
-"neobundle.vim {{{1
+"Vundle.vim {{{1
 "--------------
 " $ mkdir -p ~/.vim/bundle
-" $ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+" $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "--------------
 set nocompatible
 filetype off
 
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
 " bundles {{{2
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'claco/jasmine.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'leafgarland/typescript-vim'
-NeoBundle 'clausreinke/typescript-tools'
-NeoBundle 'avakhov/vim-yaml'
+Plugin 'kien/ctrlp.vim'
+Plugin 'claco/jasmine.vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'avakhov/vim-yaml'
 
-filetype plugin on
-filetype indent on
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
-NeoBundleCheck
-
-call neobundle#end()
 
 " Tab pages  "{{{2
 " Fallback  "{{{3
