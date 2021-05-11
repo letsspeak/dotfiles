@@ -31,7 +31,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " bundles {{{2
 Plugin 'kien/ctrlp.vim'
-Plugin 'claco/jasmine.vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'avakhov/vim-yaml'
 
@@ -148,46 +147,9 @@ function! s:ask_tabpage_number()
 endfunction
 nmap <C-w><C-t>  <C-w>t
 
-"au FileType c,cpp setlocal comments-=:// comments+=f://
-"au FileType c,cpp setlocal comments-=:// comments+=f://
-"au FileType conf,rb setlocal comments-=:# comments+=f:#
-"au FileType vimrc setlocal comments-=:" comments+=f:"
 autocmd FileType * setlocal formatoptions-=ro
 
-au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
 au BufRead,BufNewFile *.scala set filetype=scala
-	
-" インデントを設定
-autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
-" taglistの設定 coffeeを追加
-" let g:tlist_coffee_settings = 'coffee;f:function;v:variable'
-
-" QuickRunのcoffee
-" let g:quickrun_config['coffee'] = {
-"      \'command' : 'coffee',
-"      \'exec' : ['%c -cbp %s']
-"      \}
-
-"------------------------------------
-" vim-coffee-script
-"------------------------------------
-" 保存時にコンパイル
-"autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
-
-"------------------------------------
-" jasmine.vim
-"------------------------------------
-" ファイルタイプを変更
-function! JasmineSetting()
-  au BufRead,BufNewFile *Helper.js,*Spec.js  set filetype=jasmine.javascript
-  au BufRead,BufNewFile *Helper.coffee,*Spec.coffee  set filetype=jasmine.coffee
-  au BufRead,BufNewFile,BufReadPre *Helper.coffee,*Spec.coffee  let b:quickrun_config = {'type' : 'coffee'}
-  call jasmine#load_snippets()
-  map <buffer> <leader>m :JasmineRedGreen<CR>
-  command! JasmineRedGreen :call jasmine#redgreen()
-  command! JasmineMake :call jasmine#make()
-endfunction
-au BufRead,BufNewFile,BufReadPre *.coffee,*.js call JasmineSetting()
 
 "------------------------------------
 " indent_guides
@@ -202,7 +164,7 @@ let g:indent_guides_space_guides=1
 
 hi IndentGuidesOdd  ctermbg=235
 hi IndentGuidesEven ctermbg=237
-au FileType coffee,ruby,javascript,python IndentGuidesEnable
+au FileType ruby,python IndentGuidesEnable
 nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
 au BufNewFile,BufRead *.ejs set filetype=html
